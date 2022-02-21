@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .warning {
+            color: darkkhaki;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: forestgreen;
+        }
+
+
+    </style>
+</head>
+<body>
+{% if messages %}
+    {% for msg in messages %}
+        <li class="{{ msg.tags }}">{{ msg }}</li>
+    {% endfor %}
+{% endif %}
+</body>
+</html>
