@@ -1,16 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<form method="POST" action="#">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="register">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <main id="register">
+        <div class="container">
+            <div class="page-login">
+                <h1 class="page-title signin-title border-bottom width-100 margin-bottom-30 padding-bottom-30">
+                    ثبت نام در وب سایت
+                </h1>
+                <div class="form-register ">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <select name="">
+                            <option value="">انتخاب استان</option>
+                            <option value="">تهران</option>
+                            <option value="">خراسان رضوی</option>
+                            <option value="">فارس</option>
+                        </select>
+                        <select name="">
+                            <option value="">انتخاب شهر</option>
+                            <option value="">سعادت آباد</option>
+                            <option value="">ستارخان</option>
+                            <option value="">مشهد</option>
+                        </select>
+                        <button type="submit" class="btn btn-brand box-show-btn width-100 btn-account mb-10 ">ثبت نام در
+                            وب سایت
+                        </button>
+                        <button class="btn btn-cancel  width-100 btn-account "
+                                onclick="spa()">
+                            انصراف
+                        </button>
+                        <div class="c-account-box__footer">
+                            <span>در سایت عضوید؟</span>
+                            <a href="{% url 'accounts:login' %}" class="gotopage">صفحه ورود</a>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <script>
+        function spa() {
+            $.ajax({
+                type: "GET",
+                url: {% url 'home:home' %},
+                data: data,
+                success: success,
+                dataType: dataType
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
+from django.utils.translation import gettext_lazy as _
 from .models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -40,10 +40,16 @@ class UserChangedForm(forms.ModelForm):
 
 
 class UserRegistrForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    fullname = forms.CharField(label='full_name', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fullname = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'text', 'placeholder': _('نام و نام خانوادگی')}))
+    email = forms.EmailField(label='',
+                             widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('ایمیل')}))
+    phone = forms.CharField(label='',
+                            widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('تلفن')}))
+    password = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
+    password2 = forms.CharField(label='', widget=forms.TextInput(
+        attrs={'class': 'text text-left', 'placeholder': _('تکرار رمز عبور')}))
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -61,9 +67,12 @@ class UserRegistrForm(forms.Form):
 
 
 class VerifyCodeForm(forms.Form):
-    code = forms.IntegerField()
+    code = forms.IntegerField(label='', widget=forms.TextInput(
+        attrs={'class': 'text text-left', 'placeholder': _('کد فعال سازی')}))
 
 
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='',
+                             widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('ایمیل')}))
+    password = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))

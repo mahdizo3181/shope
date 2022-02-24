@@ -6,7 +6,7 @@ from utils import send_otp_code
 from .models import OtpCode, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-
+from django.utils.translation import gettext as _
 
 # Create your views here.
 
@@ -16,6 +16,7 @@ class UserRegistrView(View):
 
     def get(self, request):
         form = self.form_class
+
         return render(request, 'accounts/register.html', {'form': form})
 
     def post(self, request):
@@ -49,8 +50,8 @@ class UserRegistrVerifyCodeView(View):
         if form.is_valid():
             cd = form.cleaned_data
             if cd['code'] == code_instance.code:
-                User.objects.create_user(user_session['email'], user_session['password'], user_session['full_name'],
-                                         user_session['phone_number']
+                User.objects.create_user(email=user_session['email'], password=user_session['password'], fullname=user_session['full_name'],
+                                         phone=user_session['phone_number']
                                          )
                 code_instance.delete()
                 messages.success(request, 'you registered.', 'success')

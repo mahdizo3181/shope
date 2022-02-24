@@ -1,17 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<h2>login user</h2>
-<form method="POST" action="#">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="login">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <main id="login">
+        <div class="container">
+            <div class="page-login">
+                <h1 class="page-title signin-title border-bottom width-100 margin-bottom-30 padding-bottom-30">
+                    ورود به وب‌سایت
+                </h1>
+                <div class="form-login ">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <label class="lblcheckbox text-right">
+                            <input type="checkbox" class="checkboxFilter">
+                            <span class="checkmark position-relative"></span>
+                            مرا بخاطر بسپار
+
+                        </label>
+                        <a class="recoverpassword" href="recoverpassword.html">بازیابی رمز عبور</a>
+                        <button type="submit" class="btn btn-brand box-show-btn width-100 btn-account ">ورود به سایت
+                        </button>
+                        <div class="c-account-box__footer">
+                            <span>کاربر جدید هستید؟</span>
+                            <a href="{% url 'accounts:user_register' %}" class="gotopage">صفحه ثبت نام</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

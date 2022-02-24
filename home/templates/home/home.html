@@ -1,3 +1,455 @@
 {% extends 'base.html' %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>وب آموز | آموزش برنامه‌ نویسی و طراحی وب</title>
+    <meta property="og:locale" content="fa"/>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/responsive.css" media="(max-width:991px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+{% endblock %}
 {% block content %}
+    <div class="container">
+        <div class="top-info">
+            <div class="slideshow">
+                <div class="slide"><img src="../../static/img/slideshow/p-1.jpg" alt=""></div>
+                <div class="slide"><img src="../../static/img/slideshow/p-2.jpg" alt=""></div>
+                <div class="slide"><img src="../../static/img/slideshow/p-3.jpg" alt=""></div>
+                <div class="slide"><img src="../../static/img/slideshow/p-4.jpg" alt=""></div>
+                <div class="slide"><img src="../../static/img/slideshow/p-5.jpg" alt=""></div>
+
+                <a class="prev" onclick="move(-1)"><span>&#10095</span></a>
+                <a class="next" onclick="move(1)"><span>&#10094</span></a>
+
+                <div class="items">
+                    <div class="item">
+                        <div class="item-inner"></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-inner"></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-inner"></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-inner"></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-inner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="optionals">
+                <div><img src="../../static/img/banner/1000024381.jpg" alt=""></div>
+                <div><img src="../../static/img/banner/1000024381.jpg" alt=""></div>
+            </div>
+        </div>
+
+        <div class="slider">
+            <div class="o-headline"><span>ماوس</span></div>
+            <div class="c-box">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/restfull-lara.jpg" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/mobile.jpg" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/reactjs.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/phpfull.jpg" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/php.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/react-redux.png" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-next">&#10095</div>
+            <div class="swiper-button-prev">&#10094</div>
+
+        </div>
+        <div class="slider">
+            <div class="o-headline"><span>ماوس</span></div>
+            <div class="c-box">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/restfull-lara.jpg" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/laravel-payment-processing.jpg"
+                                         class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/reactjs.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/phpfull.jpg" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/php.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/react-redux.png" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-next">&#10095</div>
+            <div class="swiper-button-prev">&#10094</div>
+
+        </div>
+        <aside class="c-adplacement">
+            <div class="row no-gutters flex-space-between">
+                <a href="" class="adplacement__item col-6"><img src="../../static/img/pic1.jpg" alt=""></a>
+                <a href="" class="adplacement__item col-6"><img src="../../static/img/pic2.jpg" alt=""></a>
+            </div>
+        </aside>
+        <div class="slider">
+            <div class="o-headline"><span>ماوس</span></div>
+            <div class="c-box">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/restfull-lara.jpg" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/laravel-payment-processing.jpg"
+                                         class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/reactjs.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/phpfull.jpg" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/php.png" class="c-product-box__img" alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="c-product-box">
+                                <a href="" class="c-product-box__link">
+                                    <img src="../../static/img/banner/react-redux.png" class="c-product-box__img"
+                                         alt="">
+                                </a>
+                                <div class="c-product-box__title">
+                                    <a href="">کامپیوتر همه کاره 21.5 اینچی لنوو مدل A340-C</a>
+                                </div>
+                                <div class="c-product-box__price">
+                                    <span class="c-product-box__compare-price">13,200,000</span>
+                                    <span class="c-product-box--price"><span>12,500,000 تومان</span></span>
+                                </div>
+                                <span class="c-product-box__discount">6٪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-next">&#10095</div>
+            <div class="swiper-button-prev">&#10094</div>
+
+        </div>
+
+    </div>
+
+    </main>
+
+    <footer>
+        <a href="" class="scrollToTop"></a>
+        <div class="kt-cta">
+            <div class="container">
+                <div class="row no-gutters item-center flex-space-between">
+                    <div class="col-6 text-right margin-bottom-0">
+                        <div class="get-call d-flex item-center color-444">
+                            <img src="../../static/img/banner/tamasbama.png" alt="" class="">
+                            <div class="margin-right-10">
+                                <h3>با ما تماس بگیرید</h3>
+                                <span class="font-size-13 ">برای ثبت سفارش و مشاوره با مشاوران ما تماس بگیرید!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-call col-4 text-left">
+                        <div class="d-flex flex-end  color-444 font-size-15">
+                            <span class="white-space-no-wrap">Email : info@domain.com</span>
+                            <span class="margin-right-10 white-space-no-wrap">Tel : 1023424234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-info color-444">
+            <a class="scrollToTop"></a>
+            <div class="container">
+                <div class="f-links">
+                    <div class="col-2"><a href="">خدمات هاستینگ بستلا</a></div>
+                    <div class="col-2"><a href="">لینک اول</a></div>
+                    <div class="col-2"><a href="">لینک اول</a></div>
+                    <div class="col-2"><a href="">لینک اول</a></div>
+                    <div class="col-2"><a href="">لینک اول</a></div>
+                    <div class="col-2"><a href="">لینک اول</a></div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="container">
+                <div class="f-about">
+                    <div class="col-8 margin-bottom-15">
+                        <p>
+                            وب اموز مرجعی تخصصی برای یادگیری طراحی و برنامه نویسی وب و موبایل است. ما در وب اموز با بهره
+                            گیری از
+                            نیروهای متخصص، باتجربه تمام تلاش خود را برای تهیه و تولید آموزش های با کیفیت و کامل و حرفه
+                            ای
+                            انجام
+                            می دهیم. باور ما اینست که کاربران ایرانی لایق بهترین ها هستند و باید بهترین و بروزترین فیلم
+                            های
+                            آموزشی، در اختیار آنها قرار بگیرد تا بتوانند به سرعت پیشرفت کنند و جزء بهترین ها شوند. امید
+                            است
+                            که
+                            با همراهی هر چه بیشتر شما کاربران عزیز در این راه، ما را برای حرکتی قدرتمند در مسیر این هدف
+                            باارزش
+                            یاری دهید.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="webamooz">
+                طراحی و توسعه با لاراول توسط تیم
+                <a href="https://webamooz.net">وب آموز</a>
+            </div>
+        </div>
+    </footer>
+    <div class="overlay"></div>
 {% endblock %}

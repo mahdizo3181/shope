@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls'), name='home'),
     path('product/', include('product.urls'), name='product'),
-    path('accounts/', include('customer.urls', namespace='accounts'))
+    path('accounts/', include('customer.urls', namespace='accounts')),
+    path('rosetta/', include('rosetta.urls')),
+
 ]

@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <h3>
-        {{ product.name }}
-    </h3>
-    <small> {{ product.created }}</small>
-    <P>{{ product.price }}$</P>
-    <img src="{{ product.image.url }}" alt="" width="400px" height="400px">
-    <p>{{ product.description }}</p>
+    <div class="container" style="margin-right: 13rem">
+        <h3>
+            {{ product.name }}
+        </h3>
+        <small> {{ product.created }}</small>
+        <P>{{ product.price }}$</P>
+        <div class="row">
+            <img src="{{ product.image.url }}" alt="" width="400px" height="400px">
+        </div>
+        <p>{{ product.description }}</p>
+
+    </div>
 {% endblock %}

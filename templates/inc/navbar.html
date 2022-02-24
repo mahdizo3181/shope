@@ -1,9 +1,126 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="navbar-nav">
-            <a class="nav-link active" href="{% url 'home:home' %}">Home</a>
-            <a class="nav-link active" href="{% url 'accounts:user_register' %}">Register</a>
-            <a class="nav-link active" href="{% url 'product:product' %}">Products</a>
+{#<nav class="navbar navbar-expand-lg navbar-dark bg-dark">#}
+{#    <div class="container-fluid">#}
+{#        <div class="navbar-nav">#}
+{#            <a class="nav-link active" href="{% url 'home:home' %}">Home</a>#}
+{#            <a class="nav-link active" href="{% url 'accounts:user_register' %}">Register</a>#}
+{#            <a class="nav-link active" href="{% url 'product:product' %}">Products</a>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+<link rel="stylesheet" href="../../static/css/style.css">
+<link rel="stylesheet" href="../../static/css/font.css">
+<link rel="stylesheet" href="../../static/css/responsive.css" media="(max-width:991px)">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<header class="t-header">
+    <div class="t-header-inner">
+        <div class="container">
+            <div class="t-header--inner"></div>
         </div>
     </div>
-</nav>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="row alc">
+                    <div class="logo"><a class="logo-a"></a></div>
+                    <div class="navbar-nav flex-grow-1">
+                        <div class="logo d-none"><a class="logo-a"></a></div>
+
+                        <ul>
+                            <li class="nav-item active"><a href="{% url 'home:home' %}" class="nav-link">صفحه اصلی</a>
+                            </li>
+                            <li class="nav-item has-sub"><a href="{% url 'product:product' %}"
+                                                            class="nav-link">فروشگاه</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="info">
+                        <div class="text-center d-flex item-center">
+                            <div class="mini-basket position-relative">
+                                <span class="mini-basket__icon"><i class="bi bi-cart"></i></span>
+                                <div class="dropdown-menu">
+                                    <div class="content__dropdown">
+                                        <!--                                        <span class="font-size-13">موردی برای نمایش وجود ندارد</span>-->
+                                        <div class="mini-basket-item">
+                                            <a href="" class="mini-basket-img">
+                                                <img src="../../static/img/banner/390021.jpg" alt="">
+                                            </a>
+                                            <div class="mini-basket-item-details">
+                                                <h5 class="mini-basket-h5">
+                                                    <a href="">محصول شماره یک</a>
+                                                </h5>
+                                                <div class="mini-basket-price">120000 تومان</div>
+                                                <a href="" class="minicart-item-remove">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="mini-basket-item">
+                                            <a href="" class="mini-basket-img">
+                                                <img src="../../static/img/banner/390021.jpg" alt="">
+                                            </a>
+                                            <div class="mini-basket-item-details">
+                                                <h5 class="mini-basket-h5">
+                                                    <a href="">محصول شماره یک دو سه چهار پنج شیش هفت</a>
+                                                </h5>
+                                                <div class="mini-basket-price">120000 تومان</div>
+                                                <a href="" class="minicart-item-remove">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="mini-basket-item">
+                                            <a href="" class="mini-basket-img">
+                                                <img src="../../static/img/banner/390021.jpg" alt="">
+                                            </a>
+                                            <div class="mini-basket-item-details">
+                                                <h5 class="mini-basket-h5">
+                                                    <a href="">محصول شماره یک</a>
+                                                </h5>
+                                                <div class="mini-basket-price">120000 تومان</div>
+                                                <a href="" class="minicart-item-remove">حذف</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="btn-mini-basket border-top">
+                                            <a class="btn btn-brand btn-mini-basket width-100" href="#">ثبت و نهایی کردن
+                                                سفارش</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="badge">0</span>
+                            </div>
+                            <div class="login-register position-relative">
+                                <span class="login-register__icon"><i class="bi bi-person"></i></span>
+                                <div class="dropdown-menu">
+                                    <div class="content__dropdown">
+                                        <a class="login" href="{% url 'accounts:login' %}">ورود</a>
+                                        <a class="register" href="{% url 'accounts:user_register' %}">ثبت
+                                            نام</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav-icon d-none"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row header-top">
+            <div class="header-top-content">
+                <h1>وب آموز : پلی برای یادگیری</h1>
+                <p>با کمترین هزینه حرفه ای شو</p>
+            </div>
+            <form action="" method="post">
+                <div class="t-header-search">
+                    <input type="text" placeholder="جستجو کنید">
+                    <button class="search-btn"><i class="bi bi-search" style="margin: 1rem;margin-right: -1px;"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+<script src="../../static/js/jquery-3.4.1.min.js"></script>
+<script src="../../static/js/js.js"></script>
+<script src="../../static/js/countDownTimer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
