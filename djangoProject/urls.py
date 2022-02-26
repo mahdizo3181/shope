@@ -22,5 +22,4 @@ urlpatterns = [
     path('product/', include('product.urls'), name='product'),
     path('accounts/', include('customer.urls', namespace='accounts')),
     path('rosetta/', include('rosetta.urls')),
-
 ]
