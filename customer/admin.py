@@ -14,7 +14,7 @@ class OtpCodeAdmin(admin.ModelAdmin):
 class Admin(UserAdmin):
     form = UserChangedForm
     add_form = UserCreateForm
-    list_display = ('fullname', 'email', 'phone', 'is_admin')
+    list_display = ('first_name', 'last_name', 'email', 'phone', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = ((None, {'fields': ('fullname', 'email', 'phone', 'password')}),
                  ('Personal info', {'fields': ('is_active',)}),
@@ -22,7 +22,7 @@ class Admin(UserAdmin):
                  )
     add_fieldsets = (
         (None, {
-            'fields': ('fullname', 'email', 'phone', 'password1', 'password2',)
+            'fields': ('first_name', 'last_name', 'email', 'phone', 'password1', 'password2',)
         }),
     )
     search_fields = ('email',)
@@ -30,4 +30,3 @@ class Admin(UserAdmin):
     filter_horizontal = ()
 
 
-admin.site.unregister(Group)
