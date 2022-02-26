@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from rest_framework import authentication, generics, permissions, status
+from rest_framework.views import APIView
 from .forms import UserRegistrForm, VerifyCodeForm, UserLoginForm
 import random
 from utils import send_otp_code
@@ -7,8 +9,10 @@ from .models import OtpCode, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.utils.translation import gettext as _
+from customer.permissions import MyCustomPermission, UserDetail
 
 # Create your views here.
+from .serializer import UserSerializer
 
 
 class UserRegistrView(View):
@@ -50,7 +54,8 @@ class UserRegistrVerifyCodeView(View):
         if form.is_valid():
             cd = form.cleaned_data
             if cd['code'] == code_instance.code:
-                User.objects.create_user(email=user_session['email'], password=user_session['password'], fullname=user_session['full_name'],
+                User.objects.create_user(email=user_session['email'], password=user_session['password'],
+                                         fullname=user_session['full_name'],
                                          phone=user_session['phone_number']
                                          )
                 code_instance.delete()
