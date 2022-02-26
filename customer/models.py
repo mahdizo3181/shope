@@ -2,19 +2,20 @@ from django.db import models
 from django.db.models import Model
 from django.utils.translation import gettext_lazy as _
 from core.models import BaseModel
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from .managers import MyUserManager
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     email = models.EmailField(max_length=100, unique=True)
     phone = models.CharField(max_length=16)
-    fullname = models.CharField(max_length=40)
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     objects = MyUserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone', 'fullname']
+    REQUIRED_FIELDS = ['phone', 'first_name', 'last_name', ]
 
     class Meta:
         verbose_name = _('User')
