@@ -11,7 +11,7 @@ class UserCreateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'fullname', 'phone']
+        fields = ['email', 'first_name', 'last_name', 'phone']
 
     def clean_password2(self):
         clean_data = self.cleaned_data
@@ -33,7 +33,7 @@ class UserChangedForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'fullname', 'phone', 'password', 'last_login']
+        fields = ['email', 'first_name', 'last_name', 'phone', 'password', 'last_login']
 
     def clean_password(self):
         return self.initial['password']
@@ -47,8 +47,9 @@ class UserRegistrForm(forms.Form):
     phone = forms.CharField(label='',
                             widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('تلفن')}))
     password = forms.CharField(label='',
-                               widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
-    password2 = forms.CharField(label='', widget=forms.TextInput(
+                               widget=forms.PasswordInput(
+                                   attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
+    password2 = forms.CharField(label='', widget=forms.PasswordInput(
         attrs={'class': 'text text-left', 'placeholder': _('تکرار رمز عبور')}))
 
     def clean_email(self):
@@ -75,4 +76,5 @@ class UserLoginForm(forms.Form):
     email = forms.EmailField(label='',
                              widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('ایمیل')}))
     password = forms.CharField(label='',
-                               widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
+                               widget=forms.PasswordInput(
+                                   attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
