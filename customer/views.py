@@ -9,10 +9,9 @@ from .models import OtpCode, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.utils.translation import gettext as _
-from customer.permissions import MyCustomPermission, UserDetail
+
 
 # Create your views here.
-from .serializer import UserSerializer
 
 
 class UserRegistrView(View):
