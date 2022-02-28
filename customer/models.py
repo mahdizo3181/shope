@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import Model
 from django.utils.translation import gettext_lazy as _
+from social_core.backends import username
+
 from core.models import BaseModel
 from django.contrib.auth.models import AbstractUser
 from .managers import MyUserManager
@@ -39,6 +41,10 @@ class User(AbstractUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super().save(*args, **kwargs)
 
 
 class Address(BaseModel):
