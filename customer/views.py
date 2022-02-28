@@ -31,7 +31,8 @@ class UserRegistrView(View):
             request.session['user_registration_info'] = {
                 'phone_number': form.cleaned_data['phone'],
                 'email': form.cleaned_data['email'],
-                'full_name': form.cleaned_data['fullname'],
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name'],
                 'password': form.cleaned_data['password'],
             }
             messages.success(request, 'we sent you a code', 'success')
@@ -53,8 +54,8 @@ class UserRegistrVerifyCodeView(View):
         if form.is_valid():
             cd = form.cleaned_data
             if cd['code'] == code_instance.code:
-                User.objects.create_user(email=user_session['email'], password=user_session['password'],
-                                         fullname=user_session['full_name'],
+                User.objects.create_user(email=user_session['email'], first_name=user_session['first_name'],
+                                         last_name=user_session['last_name'], password=user_session['password'],
                                          phone=user_session['phone_number']
                                          )
                 code_instance.delete()
