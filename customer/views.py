@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import authentication, generics, permissions, status
 from rest_framework.views import APIView
 from .forms import UserRegistrForm, VerifyCodeForm, UserLoginForm
@@ -7,8 +8,10 @@ import random
 from utils import send_otp_code
 from .models import OtpCode, User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -31,15 +34,17 @@ class UserRegistrView(View):
             request.session['user_registration_info'] = {
                 'phone_number': form.cleaned_data['phone'],
                 'email': form.cleaned_data['email'],
+                'username': form.cleaned_data['username'],
                 'first_name': form.cleaned_data['first_name'],
                 'last_name': form.cleaned_data['last_name'],
                 'password': form.cleaned_data['password'],
             }
-            messages.success(request, 'we sent you a code', 'success')
+            messages.success(request, '.کد ۴ رقمی برای شما ارسال گردید', 'success')
             return redirect('accounts:verify_code')
         return render(request, 'accounts/register.html', {'form': form})
 
 
+# @method_decorator(csrf_exempt, name='dispatch')
 class UserRegistrVerifyCodeView(View):
     form_class = VerifyCodeForm
 
@@ -54,16 +59,24 @@ class UserRegistrVerifyCodeView(View):
         if form.is_valid():
             cd = form.cleaned_data
             if cd['code'] == code_instance.code:
-                User.objects.create_user(email=user_session['email'], first_name=user_session['first_name'],
+                User.objects.create_user(email=user_session['email'], username=user_session['username'],
+                                         first_name=user_session['first_name'],
                                          last_name=user_session['last_name'], password=user_session['password'],
                                          phone=user_session['phone_number']
                                          )
                 code_instance.delete()
-                messages.success(request, 'you registered.', 'success')
+                messages.success(request, '.ثبت نام با موفقیت انجام شد', 'success')
                 return redirect('home:home')
             else:
-                messages.error(request, 'this code is wrong', 'danger')
+                messages.error(request, '.کد وارد شده اشتباه است', 'danger')
                 return redirect('accounts:verify_code')
+        return redirect('home:home')
+
+
+class UserLogoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, '.با موفقیت خارج شدید ', 'success')
         return redirect('home:home')
 
 
@@ -79,10 +92,10 @@ class UserLoginView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['email'], password=cd['password'])
+            user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
                 login(request, user)
-                messages.success(request, 'you logged in successfully', 'success')
+                messages.success(request, '.با موفقیت وارد شدید', 'success')
                 return redirect('home:home')
-            messages.error(request, 'username or password is wrong', 'warning')
+            messages.error(request, '.نام کاربری یا رمز عبور اشتباه است', 'warning')
         return render(request, self.template_name, {'form': form})
