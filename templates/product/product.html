@@ -1,28 +1,39 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block body %}
-    {% for category in categories %}
-        <!-- Example split danger button -->
-        <div class="btn-group">
-            <a href="{{ category.get_absolute_url }}" class="btn btn-danger">{{ category.name }}</a>
-            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-            </button>
-            <div class="dropdown-menu">
-                {% for i in category.scategory.all %}
-                    <a class="dropdown-item" href="{{ i.get_absolute_url }}">{{ i.name }}</a>
-                {% endfor %}
-            </div>
+    <div class="row">
+        <div class="container">
+            {% for category in categories %}
+                <!-- Example split danger button -->
+                <div class="btn-group">
+                    <a href="{% url 'product:category' slug=category.slug %}"
+                       class="btn btn-danger">{{ category.name }}</a>
+                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for i in category.scategory.all %}
+                            <a class="dropdown-item" href="{% url 'product:category' slug=i.slug %}">{{ i.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% endfor %}
         </div>
-    {% endfor %}<br><br><br>
-    {% for product in product %}
-        <div class="card" style="width: 18rem;display: inline-block">
-            <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">{{ product.name }}</a>
-            </div>
+    </div>
+    <br><br><br>
+    <div class="row">
+        <div class="container">
+            {% for product in product %}
+                <div class="card" style="width: 18rem;display: inline-block">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <a href="{% url 'product:product_detail' slug=product.slug %}"
+                           class="">{{ product.name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}
