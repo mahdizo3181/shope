@@ -40,6 +40,8 @@ class UserChangedForm(forms.ModelForm):
 
 
 class UserRegistrForm(forms.Form):
+    username = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام کاربری')}))
     first_name = forms.CharField(label='',
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام')}))
     last_name = forms.CharField(label='',
@@ -54,6 +56,13 @@ class UserRegistrForm(forms.Form):
                                    attrs={'class': 'form-control', 'placeholder': _('رمز عبور')}))
     password2 = forms.CharField(label='', widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': _('تکرار رمز عبور')}))
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        user = User.objects.filter(username=username).exists()
+        if user:
+            raise ValidationError('this username already exists')
+        return username
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -72,12 +81,12 @@ class UserRegistrForm(forms.Form):
 
 class VerifyCodeForm(forms.Form):
     code = forms.IntegerField(label='', widget=forms.TextInput(
-        attrs={'class': 'text text-left', 'placeholder': _('کد فعال سازی')}))
+        attrs={'class': 'form-control', 'placeholder': _('کد فعال سازی')}))
 
 
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(label='',
-                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('ایمیل')}))
+    username = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام کاربری')}))
     password = forms.CharField(label='',
                                widget=forms.PasswordInput(
                                    attrs={'class': 'form-control', 'placeholder': _('رمز عبور')}))
