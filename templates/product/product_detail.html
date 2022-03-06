@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+{% block body %}
+    <main class="container">
+
+        <!-- Left Column / Headphones Image -->
+        <div class="">
+            <img  src="{{ product.image.url }}" alt="" width="400px" height="400px">
+        </div>
+
+
+        <!-- Right Column -->
+        <div class="right-column">
+
+            <!-- Product Description -->
+            <div class="product-description">
+                <h4>{{ product.brand }}</h4>
+                <h1>{{ product.name }}</h1>
+                <hr>
+                <p>{{ product.description }}</p>
+            </div>
+            <!-- Product Pricing -->
+            <div class="product-price">
+                <span>تومان {{ product.price }}</span>
+                <a href="#" class="cart-btn">افزودن به سبد خرید</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

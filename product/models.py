@@ -26,7 +26,7 @@ class Category(BaseModel):
     name = models.CharField(max_length=20)
     category_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='scategory')
     is_sub = models.BooleanField(default=False)
-    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
 
     class Meta:
         ordering = ('name',)
@@ -35,19 +35,19 @@ class Category(BaseModel):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse('product:category_filter ', args=[self.slug, ])
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.name)
+    #     super().save(*args, **kwargs)
+    #
+    # def get_absolute_url(self):
+    #     return reverse('product:category_filter ', args=[self.slug, ])
 
 
 class Product(BaseModel):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=4)
     category = models.ManyToManyField(Category, related_name='products')
-    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     discount_id = models.ForeignKey(Discount, on_delete=models.CASCADE, related_name='products', null=True, blank=True)
     brand = models.CharField(max_length=40)
     inventory = models.CharField(max_length=30)
@@ -61,9 +61,9 @@ class Product(BaseModel):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.name)
+    #     super().save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return reverse('product:product_detail', args=[self.slug, ])
+    # def get_absolute_url(self):
+    #     return reverse('product:product_detail', args=[self.slug, ])

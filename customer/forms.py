@@ -40,17 +40,29 @@ class UserChangedForm(forms.ModelForm):
 
 
 class UserRegistrForm(forms.Form):
-    fullname = forms.CharField(label='',
-                               widget=forms.TextInput(attrs={'class': 'text', 'placeholder': _('نام و نام خانوادگی')}))
+    username = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام کاربری')}))
+    first_name = forms.CharField(label='',
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام')}))
+    last_name = forms.CharField(label='',
+                                widget=forms.TextInput(
+                                    attrs={'class': 'form-control', 'placeholder': _('نام خانوادگی')}))
     email = forms.EmailField(label='',
-                             widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('ایمیل')}))
+                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('ایمیل')}))
     phone = forms.CharField(label='',
-                            widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('تلفن')}))
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('تلفن')}))
     password = forms.CharField(label='',
                                widget=forms.PasswordInput(
-                                   attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
+                                   attrs={'class': 'form-control', 'placeholder': _('رمز عبور')}))
     password2 = forms.CharField(label='', widget=forms.PasswordInput(
-        attrs={'class': 'text text-left', 'placeholder': _('تکرار رمز عبور')}))
+        attrs={'class': 'form-control', 'placeholder': _('تکرار رمز عبور')}))
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        user = User.objects.filter(username=username).exists()
+        if user:
+            raise ValidationError('this username already exists')
+        return username
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -69,12 +81,12 @@ class UserRegistrForm(forms.Form):
 
 class VerifyCodeForm(forms.Form):
     code = forms.IntegerField(label='', widget=forms.TextInput(
-        attrs={'class': 'text text-left', 'placeholder': _('کد فعال سازی')}))
+        attrs={'class': 'form-control', 'placeholder': _('کد فعال سازی')}))
 
 
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(label='',
-                             widget=forms.TextInput(attrs={'class': 'text text-left', 'placeholder': _('ایمیل')}))
+    username = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('نام کاربری')}))
     password = forms.CharField(label='',
                                widget=forms.PasswordInput(
-                                   attrs={'class': 'text text-left', 'placeholder': _('رمز عبور')}))
+                                   attrs={'class': 'form-control', 'placeholder': _('رمز عبور')}))

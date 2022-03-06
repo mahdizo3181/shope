@@ -23,7 +23,7 @@ class Order(BaseModel):
 
 
 class OrderItem(BaseModel):
-    ordget_coster = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
     quantity = models.PositiveIntegerField(default=1)
 
