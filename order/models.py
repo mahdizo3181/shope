@@ -1,18 +1,19 @@
 from django.db import models
 from core.models import BaseModel
 from product.models import Product
-from customer.models import User
+from customer.models import User, Address
 
 
 class Order(BaseModel):
-    customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.IntegerField()
+    customer_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT, null=True, blank=True)
+    off_code = models.ForeignKey(to='OffCode', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return f'{self.customer_id} - {self.id}'
+        return f'{self.id}'
 
     """
     method get_total_price : khode sefaresh ro darim (ORDER) aval miad hamey items haro migire  bad tosh halghe for mizane tamam item haro migire bad jam mikone.
@@ -23,12 +24,13 @@ class Order(BaseModel):
 
 
 class OrderItem(BaseModel):
+    customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return self.id
+        return f'{self.id}'
 
     def get_cost(self):
         return self.product.price * self.quantity
