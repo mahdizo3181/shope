@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+{% endblock %}
 {% block body %}
     <div class="row">
         <div class="container">
@@ -25,15 +32,29 @@
     <div class="row">
         <div class="container">
             {% for product in product %}
-                <div class="card" style="width: 18rem;display: inline-block">
+                <div class="card" style="width: 18rem;display: inline-block ; margin: 1rem">
                     <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <a href="{% url 'product:product_detail' slug=product.slug %}"
                            class="">{{ product.name }}</a>
                     </div>
+                    <input data-action="add" data-product={{ product.id }}  type="submit" class="cart-btn update-cart"
+                           value="افزودن به سبد خرید" style="width: 18rem;" id="button">
                 </div>
+
             {% endfor %}
         </div>
     </div>
+    <script>
+        $('#button').click(function () {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'محصول به سبد خرید اضافه شد',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    </script>
 {% endblock %}
