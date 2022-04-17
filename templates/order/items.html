@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'gorbeh/css/gorbeh-icons.min.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+{% block body %}
+    <h1 style="text-align: end;padding: 1rem">سبد خرید</h1>
+
+    <div class="shopping-cart" style="margin: 3rem;">
+
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">Price</label>
+            <label class="product-quantity">Quantity</label>
+            <label class="product-removal">Remove</label>
+            <label class="product-line-price">Total</label>
+        </div>
+        {% for item in items %}
+            <div class="product">
+                <div class="product-image">
+                    <img src="{{ item.product.image.url }}">
+                </div>
+                <div class="product-details">
+                    <div class="product-title" style="font-size: 2rem">{{ item.product.name }}</div>
+                    <p class="product-description" style="font-size: 15px">{{ item.product.description }}</p>
+                </div>
+                <div class="product-price" style="font-size: 15px">{{ item.product.price }}</div>
+                <div class="product-quantity product-removal" item-id="{{ item.id }}">
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="font-size: 15px">
+                    <button class="remove-product">
+                        <a style="- cursor: pointer" class="delete-key">حذف</a>
+                    </button>
+                </div>
+                <div class="product-line-price" style="font-size: 15px">{{ item.product.price }}</div>
+            </div>
+        {% endfor %}
+
+
+
+        <div class="totals" style="font-size: 15px">
+            <div class="totals-item">
+                <label>Subtotal</label>
+                <div class="totals-value" id="cart-subtotal"></div>
+            </div>
+            <div class="totals-item">
+                <label>Shipping</label>
+                <div class="totals-value" id="cart-shipping">5.00</div>
+            </div>
+            <div class="totals-item totals-item-total">
+                <label>Grand Total</label>
+                <div class="totals-value" id="cart-total"></div>
+            </div>
+        </div>
+        <a class="checkout" href="{% url 'order' %}" type="button">Checkout</a>
+    </div>
+    <script>
+        $(document).ajaxStart(function () {
+            $('center').attr('class', 'blur-bg')
+            $('.loading').fadeIn()
+        })
+        $(document).ajaxStop(function () {
+            $('center').attr('class', '')
+            $('.loading').fadeOut()
+        })
+        $('input[name=quantity]').on('change', function () {
+            let count = $(this).val()
+            let item_id = $(this).parent().attr('item-id')
+
+            $.ajax({
+                method: 'PATCH',
+                url: "{% url 'order_item' 0 %}".replace('0', item_id),
+                data: {
+                    'quantity': count
+                },
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+        })
+
+        $('button[class=remove-product]').on('click', function () {
+            let parent = $(this).parent()
+            let item_id = parent.attr('item-id')
+            $.ajax({
+                type: 'DELETE',
+                url: "{% url 'order_item' 0 %}".replace('0', item_id),
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function () {
+                    parent.remove()
+                }
+            })
+        })
+        /* Set rates + misc */
+        var taxRate = 0.05;
+        var shippingRate = 15.00;
+        var fadeTime = 300;
+
+
+        /* Assign actions */
+        $('.product-quantity input').change(function () {
+            updateQuantity(this);
+        });
+
+        $('.product-removal button').click(function () {
+            removeItem(this);
+        });
+
+
+        /* Recalculate cart */
+        $(document).ready(function () {
+            var subtotal = 0;
+
+            /* Sum up row totals */
+            $('.product').each(function () {
+                subtotal += parseFloat($(this).children('.product-line-price').text());
+            });
+
+            /* Calculate totals */
+            var tax = subtotal * taxRate;
+            var shipping = (subtotal > 0 ? shippingRate : 0);
+            var total = subtotal + tax + shipping;
+
+            /* Update totals display */
+            $('.totals-value').fadeOut(fadeTime, function () {
+                $('#cart-subtotal').html(subtotal.toFixed(2));
+                $('#cart-tax').html(tax.toFixed(2));
+                $('#cart-shipping').html(shipping.toFixed(2));
+                $('#cart-total').html(total.toFixed(2));
+                if (total == 0) {
+                    $('.checkout').fadeOut(fadeTime);
+                } else {
+                    $('.checkout').fadeIn(fadeTime);
+                }
+                $('.totals-value').fadeIn(fadeTime);
+            });
+        })
+
+        function recalculateCart() {
+            var subtotal = 0;
+
+            /* Sum up row totals */
+            $('.product').each(function () {
+                subtotal += parseFloat($(this).children('.product-line-price').text());
+            });
+
+            /* Calculate totals */
+            var tax = subtotal * taxRate;
+            var shipping = (subtotal > 0 ? shippingRate : 0);
+            var total = subtotal + tax + shipping;
+
+            /* Update totals display */
+            $('.totals-value').fadeOut(fadeTime, function () {
+                $('#cart-subtotal').html(subtotal.toFixed(2));
+                $('#cart-tax').html(tax.toFixed(2));
+                $('#cart-shipping').html(shipping.toFixed(2));
+                $('#cart-total').html(total.toFixed(2));
+                if (total == 0) {
+                    $('.checkout').fadeOut(fadeTime);
+                } else {
+                    $('.checkout').fadeIn(fadeTime);
+                }
+                $('.totals-value').fadeIn(fadeTime);
+            });
+        }
+
+
+        /* Update quantity */
+        function updateQuantity(quantityInput) {
+            /* Calculate line price */
+            var productRow = $(quantityInput).parent().parent();
+            var price = parseFloat(productRow.children('.product-price').text());
+            var quantity = $(quantityInput).val();
+            var linePrice = price * quantity;
+
+            /* Update line price display and recalc cart totals */
+            productRow.children('.product-line-price').each(function () {
+                $(this).fadeOut(fadeTime, function () {
+                    $(this).text(linePrice.toFixed(2));
+                    recalculateCart();
+                    $(this).fadeIn(fadeTime);
+                });
+            });
+        }
+
+
+        /* Remove item from cart */
+        function removeItem(removeButton) {
+            /* Remove row from DOM and recalc cart total */
+            var productRow = $(removeButton).parent().parent();
+            productRow.slideUp(fadeTime, function () {
+                productRow.remove();
+                recalculateCart();
+            });
+        }
+    </script>
+{% endblock %}
