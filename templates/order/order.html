@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'gorbeh/css/gorbeh-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+{% block body %}
+    {% for address in address %}
+        <H3></H3>
+    {% endfor %}
+
+    <form action="#" method="post" style="display: flex;flex-direction: column;">
+        {% csrf_token %}
+        <label for="address" style="font-size: 15px">انتخاب آدرس</label>
+        <select name="address" id="address" style="padding: 1rem;width: 40rem;font-size: 21px;">
+            {% for address in address %}
+
+                <H3>{{ address }}</H3>
+                <option style="font-size:20px" value={{ address.id }}
+                >{{ address.City }},{{ address.province }},{{ address.description }},{{ address.home_plate }}</option>
+
+            {% endfor %}
+        </select>
+        <button class="checkout" type="submit" style="margin: 8rem">ثبت سفارش</button>
+        <br><br>
+    </form>
+{% endblock %}
