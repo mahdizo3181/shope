@@ -15,11 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from order.apis import OrderItemApi, OrderItemDetailApi
+from order.views import OrderItemDetailView, OrderView, CustomerOrder
+from product.views import *
+from customer.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls'), name='home'),
     path('product/', include('product.urls'), name='product'),
     path('accounts/', include('customer.urls', namespace='accounts')),
+    path('order/<int:pk>', OrderItemApi.as_view()),
+    path('cart/', OrderItemDetailView.as_view(), name='cart'),
+    path('orderitem/<int:pk>', OrderItemDetailApi.as_view(), name='order_item'),
     path('rosetta/', include('rosetta.urls')),
+    path('update_item/', updateItem, name='update_item'),
+    path('address/', UserAddress.as_view(), name='address'),
+    path('order/', OrderView.as_view(), name='order'),
+    path('orders/', CustomerOrder.as_view(), name='orders')
+
 ]
