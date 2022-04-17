@@ -3,10 +3,10 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import authentication, generics, permissions, status
 from rest_framework.views import APIView
-from .forms import UserRegistrForm, VerifyCodeForm, UserLoginForm
+from .forms import UserRegistrForm, VerifyCodeForm, UserLoginForm, UserAddressForm
 import random
 from utils import send_otp_code
-from .models import OtpCode, User
+from .models import OtpCode, User, Address
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
@@ -98,4 +98,25 @@ class UserLoginView(View):
                 messages.success(request, '.با موفقیت وارد شدید', 'success')
                 return redirect('home:home')
             messages.error(request, '.نام کاربری یا رمز عبور اشتباه است', 'warning')
+        return render(request, self.template_name, {'form': form})
+
+
+class UserAddress(View):
+    form_class = UserAddressForm
+    template_name = 'accounts/profile.html'
+
+    def get(self, request):
+        form = self.form_class
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = request.user
+            Address.objects.create(customer_id=user, City=cd['city'], province=cd['province'],
+                                   description=cd['description'], home_plate=cd['home_plate'],
+                                   postal_code=cd['post'])
+            messages.success(request, '.آدرس شما با موفقیت ثبت شد', 'success')
+            return redirect('home:home')
         return render(request, self.template_name, {'form': form})
