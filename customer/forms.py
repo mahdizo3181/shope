@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from .models import User
+from .models import User, Address
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 
@@ -90,3 +90,22 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(label='',
                                widget=forms.PasswordInput(
                                    attrs={'class': 'form-control', 'placeholder': _('رمز عبور')}))
+
+
+class UserAddressForm(forms.Form):
+    city = forms.CharField(label='', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('شهر')}))
+    province = forms.CharField(label='',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('استان')}))
+    description = forms.CharField(label='',
+                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('آدرس')}))
+    home_plate = forms.CharField(label='',
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('پلاک')}))
+    post = forms.CharField(label='',
+                           widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('کد پستی')}))
+
+    def clean_home_plate(self):
+        home_plate = self.cleaned_data['home_plate']
+        user = Address.objects.filter(home_plate=home_plate).exists()
+        if user:
+            raise ValidationError('.شماره پلاک مورد نطر موجود است ')
+        return home_plate
