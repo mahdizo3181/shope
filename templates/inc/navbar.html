@@ -13,7 +13,7 @@
             <div id="search-btn" class="fas fa-search">
             </div>
             <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
+            <a href="{% url 'cart' %}" class="fas fa-shopping-cart"></a>
             {% if request.user.is_authenticated %}
                 <div id="login-btn" class="fas fa-user"></div>
             {% else %}
@@ -51,18 +51,23 @@
     </nav>
     <div class="login-form-container">
         <div id="close-login-btn" class="fas fa-times"></div>
-        <form action="">
+        <div class="">
             <h3 style="text-align: end;">:مدریت حساب</h3>
             <hr>
             {% if request.user.is_authenticated %}
-                <button class="btn btn-primary">
-                    <a href="#" style="color: white">پروفایل</a>
+                <button class="btn btn-primary form-control" style="width: 28rem;
+">
+                    <a href="{% url 'address' %}" style="color: white">ثبت آدرس جدید</a>
+                </button>
+                <button class="btn btn-primary form-control" style="width: 28rem;
+">
+                    <a href="{% url 'orders' %}" style="color: white">سفارش ها</a>
                 </button>
             {% else %}
                 <p>.ابتدا وارد حساب خود شوید</p>
             {% endif %}
 
-        </form>
+        </div>
 
     </div>
 </header>
